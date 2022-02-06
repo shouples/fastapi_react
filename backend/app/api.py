@@ -29,8 +29,13 @@ async def read_root() -> dict:
 @app.get("/data")
 async def get_sample() -> dict:
     choices = ['foo', 'bar', 'baz']
-    choice = random.choice(choices)
+    colors = [
+        'primary', 'secondary', 
+        'success', 'warning', 'error', 
+        'info'
+    ]
     return {
-        "random_choice": choice,
-        "number": random.random()
+        "val": random.choice(choices),
+        "number": random.random(),
+        "color": random.choice(colors),
     }

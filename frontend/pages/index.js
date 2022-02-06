@@ -9,13 +9,19 @@ import Button from '@mui/material/Button';
 export default function Home() {
 
   const [clickData, setClickData] = useState('');
+  const [color, setColor] = useState('info');
 
   const callBackend = async () => {
     const resp = await fetch("http://localhost:8000/data");
     console.log("resp:", resp);
+
     const data = await resp.json();
     console.log("data:", JSON.stringify(data));
     setClickData(JSON.stringify(data));
+
+    const color = data.color;
+    console.log("color:", color);
+    setColor(color);
   };
 
   return (
@@ -35,17 +41,22 @@ export default function Home() {
 
         <div className={styles.grid}>
 
-          <div className={styles.card}>
+          <div className={styles.card} style={{ borderColor: { color } }}>
             <Button
               variant="contained"
               onClick={callBackend}
+              color={color}
             >
               Click me!
             </Button>
 
             <Alert
               severity="info"
-              style={{ margin: "1rem" }}
+              style={{
+                marginTop: "1rem",
+                padding: "1rem"
+              }}
+              color={color}
             >
               {clickData}
             </Alert>
@@ -53,8 +64,8 @@ export default function Home() {
 
         </div>
 
-      </main>
+      </main >
 
-    </div>
+    </div >
   )
 }
