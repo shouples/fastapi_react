@@ -2,14 +2,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 
+import random
+
+
 app = FastAPI()
 
+# CORS setup
 origins = [
     "http://localhost:3000",
     "localhost:3000"
 ]
-
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -22,3 +24,13 @@ app.add_middleware(
 @app.get("/", tags=["root"])
 async def read_root() -> dict:
     return {"message": "Hello, world!"}
+
+
+@app.get("/data")
+async def get_sample() -> dict:
+    choices = ['foo', 'bar', 'baz']
+    choice = random.choice(choices)
+    return {
+        "random_choice": choice,
+        "number": random.random()
+    }
