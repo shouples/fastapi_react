@@ -1,0 +1,22 @@
+# List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
+tasks:
+  - name: Backend
+    init: |
+      pyenv install 3.9.7
+      curl -sSL https://install.python-poetry.org | python -
+      cd backend
+      poetry install
+    command: echo 'start script'
+
+  - name: Frontend
+    init: npm install
+    command: yarn dev
+
+
+# List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 3000
+    onOpen: open-preview
+
+  - port: 8000
+    onOpen: open-preview
