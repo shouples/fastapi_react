@@ -4,12 +4,16 @@ tasks:
     init: |
       pyenv install 3.9.7
       curl -sSL https://install.python-poetry.org | python -
+      pyenv local 3.9.7
       cd backend
       poetry install
+
     command: poetry run python main.py
 
   - name: Frontend
-    init: npm install
+    init: |
+      cd frontend
+      npm install
     command: yarn dev
 
 
